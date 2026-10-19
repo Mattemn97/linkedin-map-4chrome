@@ -21,13 +21,29 @@ const FILTERS = {
   f_JIYN: 'earlyApplicant',
 };
 
+const parseUrl = url => { try { return new URL(url); } catch { return null; } };
+const onLinkedIn = u => u?.hostname === 'www.linkedin.com';
+
+// Ricerca classica: è l'unica che l'importazione sa tradurre nella chiamata API.
 export function isJobSearchUrl(url) {
-  try {
-    const u = new URL(url);
-    return u.hostname === 'www.linkedin.com' && u.pathname.startsWith('/jobs/search');
-  } catch {
-    return false;
+  const u = parseUrl(url);
+  return onLinkedIn(u) && /^\/jobs\/search\/?$/.test(u.pathname);
+}
+
+// Ricerca con AI di LinkedIn (es. /jobs/search-results/): altro indirizzo, altra API.
+export function isAiJobSearchUrl(url) {
+  const u = parseUrl(url);
+  return onLinkedIn(u) && u.pathname.startsWith('/jobs/search') && !isJobSearchUrl(url);
+}
+
+// La stessa ricerca riaperta in modalità classica, tenendo i parametri che la classica capisce.
+export function classicSearchUrl(url) {
+  const src = parseUrl(url)?.searchParams ?? new URLSearchParams();
+  const out = new URLSearchParams();
+  for (const [k, v] of src) {
+    if (['keywords', 'geoId', 'location', 'distance', 'sortBy'].includes(k) || k.startsWith('f_')) out.set(k, v);
   }
+  return `https://www.linkedin.com/jobs/search/?${out}`;
 }
 
 // Codifica un valore stringa per Rest.li 2.0: tutto ciò che non è alfanumerico va in %XX.

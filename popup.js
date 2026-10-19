@@ -1,13 +1,16 @@
+import { isJobSearchUrl, isAiJobSearchUrl, classicSearchUrl } from './search.js';
+
 const $ = id => document.getElementById(id);
-const isJobSearchUrl = url => /^https:\/\/www\.linkedin\.com\/jobs\/search/.test(url ?? '');
 
 let activeTab = null;
 
 async function init() {
   [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
   const onSearch = isJobSearchUrl(activeTab?.url);
+  const onAi = isAiJobSearchUrl(activeTab?.url);
   $('search').hidden = !onSearch;
-  $('not-search').hidden = onSearch;
+  $('ai-search').hidden = !onAi;
+  $('not-search').hidden = onSearch || onAi;
 
   const { jobs = {}, importState = null } = await chrome.storage.local.get(['jobs', 'importState']);
   renderCount(jobs);
@@ -40,6 +43,11 @@ function renderImport(s) {
 $('import').addEventListener('click', () => {
   $('import').disabled = true;
   chrome.runtime.sendMessage({ type: 'import', tabId: activeTab.id, url: activeTab.url });
+});
+
+$('open-classic').addEventListener('click', async () => {
+  await chrome.tabs.update(activeTab.id, { url: classicSearchUrl(activeTab.url) });
+  window.close();
 });
 
 $('open-map').addEventListener('click', async () => {

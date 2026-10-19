@@ -1,7 +1,7 @@
 # Crea i pacchetti di rilascio in dist/:
 #   LinkeMap-<versione>-test.zip   cartella LinkeMap-<versione>/ + LEGGIMI.txt, da mandare ai tester
 #   LinkeMap-<versione>-store.zip  manifest.json alla radice, da caricare sul Chrome Web Store
-# Uso: powershell -ExecutionPolicy Bypass -File build.ps1
+# Uso: powershell -ExecutionPolicy Bypass -File build.ps1   (su macOS/Linux: sh build.sh)
 
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
@@ -9,15 +9,19 @@ Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 $root = $PSScriptRoot
 $version = (Get-Content -Raw -Encoding UTF8 (Join-Path $root 'manifest.json') | ConvertFrom-Json).version
 
-# Solo ciò che serve all'estensione: niente HAR, sorgenti SVG, script o documentazione.
-$files = @(
-  'manifest.json', 'background.js', 'parser.js', 'search.js',
-  'popup.html', 'popup.css', 'popup.js',
-  'map.html', 'map.css', 'map.js',
-  'icons/icon16.png', 'icons/icon32.png', 'icons/icon48.png', 'icons/icon128.png'
-)
-$files += Get-ChildItem -Recurse -File (Join-Path $root 'lib') |
-  ForEach-Object { $_.FullName.Substring($root.Length + 1) -replace '\\', '/' }
+# Solo ciò che serve all'estensione, elencato in build-files.txt (condiviso con build.sh).
+$files = @()
+foreach ($line in Get-Content -Encoding UTF8 (Join-Path $root 'build-files.txt')) {
+  $entry = $line.Trim()
+  if (-not $entry -or $entry.StartsWith('#')) { continue }
+  $path = Join-Path $root $entry
+  if ($entry.EndsWith('/') -and (Test-Path $path)) {
+    $files += Get-ChildItem -Recurse -File $path |
+      ForEach-Object { $_.FullName.Substring($root.Length + 1) -replace '\\', '/' }
+  } else {
+    $files += $entry
+  }
+}
 
 $missing = $files | Where-Object { -not (Test-Path (Join-Path $root $_)) }
 if ($missing) { throw "File mancanti: $($missing -join ', ')" }

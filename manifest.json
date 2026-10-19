@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
   "name": "LinkeMap",
-  "version": "0.3.0",
-  "description": "Importa le offerte di una ricerca LinkedIn Jobs e le mostra su una mappa.",
+  "version": "0.4.0",
+  "description": "Importa le offerte di una ricerca LinkedIn Jobs e le mostra su una mappa, con filtri per regione, distanza e tempo di percorso.",
+  "homepage_url": "https://github.com/Mattemn97/linkedin-map-4chrome",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -12,7 +13,8 @@
   "permissions": ["storage", "tabs", "scripting", "cookies"],
   "host_permissions": [
     "https://www.linkedin.com/*",
-    "https://nominatim.openstreetmap.org/*"
+    "https://nominatim.openstreetmap.org/*",
+    "https://router.project-osrm.org/*"
   ],
   "background": {
     "service_worker": "background.js",

@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.ps1 text eol=crlf
+LEGGIMI.txt text eol=crlf
+*.png binary
+*.zip binary

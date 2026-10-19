@@ -33,6 +33,8 @@ COME SI USA
 
 1. Vai su https://www.linkedin.com/jobs/search/ (devi aver fatto l'accesso).
 2. Cerca come fai di solito: parole chiave, località, filtri.
+   Usa la ricerca CLASSICA, non quella con l'AI di LinkedIn: se è attiva,
+   LinkeMap te lo dice e ti offre un pulsante per tornare alla classica.
 3. Con quella pagina aperta, clicca l'icona di LinkeMap.
 4. Premi "Importa le offerte di questa ricerca".
    Scarica 25 offerte ogni 1,5 secondi (massimo 1000): per 300 offerte
@@ -42,6 +44,11 @@ COME SI USA
 
 Puoi importare più ricerche: le offerte si sommano.
 "Svuota" nella mappa cancella tutto. "Esporta CSV" crea un file per Excel.
+
+Nella mappa puoi filtrare per regione e per data, ordinare le offerte,
+segnarle come preferite (stella) o nasconderle (X).
+Per cercare vicino a casa: "Scegli punto sulla mappa", clicca il punto,
+poi scrivi "Entro km" oppure "Entro minuti in auto".
 
 
 COSE DA SAPERE
@@ -57,8 +64,8 @@ COSE DA SAPERE
 
 - Privacy: le offerte restano solo nel tuo browser. L'estensione si collega
   solo a LinkedIn (con il tuo account, come faresti tu scorrendo le pagine),
-  a OpenStreetMap per trovare le coordinate delle città e a Esri per le
-  immagini della mappa. Nessun dato viene inviato allo sviluppatore.
+  a OpenStreetMap per trovare le coordinate delle città, a OSRM per i tempi
+  in auto (solo se usi quel filtro) e a Esri per le immagini della mappa. Nessun dato viene inviato allo sviluppatore.
 
 - LinkedIn non ama gli strumenti automatici: l'estensione va piano apposta,
   ma non lanciare decine di importazioni di fila.
