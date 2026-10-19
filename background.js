@@ -1,14 +1,16 @@
-import { parseJobCards, mergeJob, geocodeQuery } from './parser.js';
+import { parseJobCards, mergeJob } from './parser.js';
+import { geocodeKey, geocode, GEOCACHE_KEY } from './geo.js';
 import {
   buildSearchQuery, buildApiUrl, isJobSearchUrl, DEFAULT_DECORATION, PAGE_SIZE, MAX_RESULTS,
 } from './search.js';
 
 // Storage (chrome.storage.local):
 //   jobs:        { [jobId]: job }                       offerte raccolte
-//   geocache:    { [query]: {lat, lon} | {fail: true} } geocoding già fatto
+//   geocache2:   { ["località|cc"]: {lat, lon, cc, region} | {fail: true} } geocoding già fatto
+//   marks:       { [jobId]: 'star' | 'hidden' }          preferite / nascoste (scritte dalla mappa)
+//   mapPrefs:    stato dei filtri della mappa
 //   importState: { running, fetched, total, added, error, ignored, finishedAt }
 
-const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
 const GEOCODE_INTERVAL_MS = 1100; // policy Nominatim: max 1 richiesta/secondo
 const PAGE_DELAY_MS = 1500;       // pausa tra una pagina di risultati e la successiva
 
@@ -30,6 +32,16 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
 
 chrome.runtime.onStartup.addListener(() => geocodePending());
 
+// v0.4.0: chiavi di geocoding con codice paese. Si scarta la cache v1 (senza paese né regione,
+// con errori tipo "Italy" negli Stati Uniti) e si ricalcolano le chiavi delle offerte salvate.
+chrome.runtime.onInstalled.addListener(async () => {
+  const { jobs = {} } = await chrome.storage.local.get('jobs');
+  for (const job of Object.values(jobs)) job.geoQuery = geocodeKey(job);
+  await chrome.storage.local.set({ jobs });
+  await chrome.storage.local.remove('geocache');
+  geocodePending();
+});
+
 // ---------- Importazione di una ricerca ----------
 
 let importing = false;
@@ -41,7 +53,7 @@ async function runImport(tabId, pageUrl) {
   const save = () => chrome.storage.local.set({ importState: { ...state } });
 
   try {
-    if (!isJobSearchUrl(pageUrl)) throw new Error('La scheda attiva non è una ricerca di LinkedIn Jobs.');
+    if (!isJobSearchUrl(pageUrl)) throw new Error('La scheda attiva non è una ricerca classica di LinkedIn Jobs (linkedin.com/jobs/search/).');
 
     const cookie = await chrome.cookies.get({ url: 'https://www.linkedin.com', name: 'JSESSIONID' });
     if (!cookie) throw new Error('Non risulti collegato a LinkedIn: accedi e ricarica la pagina.');
@@ -132,7 +144,7 @@ async function ingest(json) {
   const now = Date.now();
   for (const job of parsed) {
     const merged = mergeJob(jobs[job.id], job);
-    merged.geoQuery = geocodeQuery(merged);
+    merged.geoQuery = geocodeKey(merged);
     merged.seenAt ??= now;
     jobs[job.id] = merged;
   }
@@ -155,48 +167,19 @@ async function geocodePending() {
   geocoding = true;
   try {
     for (;;) {
-      const { jobs = {}, geocache = {} } = await chrome.storage.local.get(['jobs', 'geocache']);
+      const { jobs = {}, [GEOCACHE_KEY]: geocache = {} } = await chrome.storage.local.get(['jobs', GEOCACHE_KEY]);
       const query = Object.values(jobs).map(j => j.geoQuery).find(q => q && !(q in geocache));
       if (!query) break;
 
-      const result = await geocode(query);
+      const result = await geocode(query, () => sleep(GEOCODE_INTERVAL_MS));
       if (result === undefined) break; // errore di rete / rate limit: riprova più tardi
 
-      const { geocache: fresh = {} } = await chrome.storage.local.get('geocache');
+      const { [GEOCACHE_KEY]: fresh = {} } = await chrome.storage.local.get(GEOCACHE_KEY);
       fresh[query] = result;
-      await chrome.storage.local.set({ geocache: fresh });
+      await chrome.storage.local.set({ [GEOCACHE_KEY]: fresh });
       await sleep(GEOCODE_INTERVAL_MS);
     }
   } finally {
     geocoding = false;
-  }
-}
-
-// Ritorna {lat, lon}, {fail: true} se il luogo non esiste, undefined se la richiesta è fallita.
-// "Città, Regione, Paese" va cercato in forma strutturata: in testo libero Nominatim
-// restituisce spesso la provincia omonima (es. Brescia -> centro della provincia).
-async function geocode(query) {
-  const parts = query.split(',').map(s => s.trim()).filter(Boolean);
-  if (parts.length >= 2) {
-    const structured = { city: parts[0], country: parts.at(-1) };
-    if (parts.length >= 3) structured.state = parts[1];
-    const hit = await nominatim(structured);
-    if (hit === undefined || hit) return hit;
-    await sleep(GEOCODE_INTERVAL_MS);
-  }
-  const hit = await nominatim({ q: query });
-  return hit === undefined ? undefined : hit ?? { fail: true };
-}
-
-// Ritorna {lat, lon}, null se nessun risultato, undefined se la richiesta è fallita.
-async function nominatim(params) {
-  const qs = new URLSearchParams({ format: 'jsonv2', limit: '1', 'accept-language': 'it', ...params });
-  try {
-    const res = await fetch(`${NOMINATIM}?${qs}`, { headers: { Accept: 'application/json' } });
-    if (!res.ok) return undefined;
-    const [hit] = await res.json();
-    return hit ? { lat: Number(hit.lat), lon: Number(hit.lon) } : null;
-  } catch {
-    return undefined;
   }
 }

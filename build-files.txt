@@ -1,0 +1,18 @@
+# File inclusi negli zip di rilascio (uno per riga, percorsi relativi alla radice).
+# Le cartelle sono incluse per intero. Usato da build.ps1 e build.sh.
+manifest.json
+background.js
+geo.js
+parser.js
+search.js
+popup.html
+popup.css
+popup.js
+map.html
+map.css
+map.js
+icons/icon16.png
+icons/icon32.png
+icons/icon48.png
+icons/icon128.png
+lib/

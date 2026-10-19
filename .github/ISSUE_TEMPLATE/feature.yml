@@ -1,0 +1,19 @@
+name: Richiesta di funzione
+description: Proponi un'idea o un miglioramento
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Che problema risolve
+      description: Cosa vorresti fare oggi e non riesci?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Come te lo immagini
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative considerate

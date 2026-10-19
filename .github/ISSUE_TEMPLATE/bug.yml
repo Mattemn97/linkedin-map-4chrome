@@ -1,0 +1,38 @@
+name: Bug
+description: Qualcosa non funziona come dovrebbe
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Grazie per la segnalazione! Non incollare cookie, token o file HAR non ripuliti."
+  - type: input
+    id: version
+    attributes:
+      label: Versione di LinkeMap
+      placeholder: "0.4.0 (si vede in chrome://extensions)"
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser e sistema
+      placeholder: "Chrome 141 su Windows 11"
+  - type: textarea
+    id: steps
+    attributes:
+      label: Cosa stavi facendo
+      description: I passi per riprodurre il problema, incluso l'indirizzo della ricerca LinkedIn (senza dati personali).
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Cosa è successo e cosa ti aspettavi
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Messaggi d'errore
+      description: Il testo nel popup o il pulsante "Errori" in chrome://extensions.
+      render: text

@@ -60,17 +60,3 @@ function pickLogo(img) {
     .find(a => a.width >= 100) ?? img.artifacts[0];
   return img.rootUrl + art.fileIdentifyingUrlPathSegment;
 }
-
-// Testo da passare al geocoder: toglie prefissi tipo "Area metropolitana di"
-// e aggiunge il paese della ricerca quando la località è una città nuda ("Brescia").
-export function geocodeQuery(job) {
-  let q = job.location
-    .replace(/^(Area metropolitana di|Grande|Greater)\s+/i, '')
-    .replace(/\s+(Metropolitan Area|Area)$/i, '')
-    .trim();
-  if (!q) return null;
-  if (!q.includes(',') && job.searchGeo && q.toLowerCase() !== job.searchGeo.toLowerCase()) {
-    q = `${q}, ${job.searchGeo}`;
-  }
-  return q;
-}

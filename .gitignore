@@ -1,0 +1,5 @@
+# Pacchetti generati da build.ps1 / build.sh (si allegano alle release GitHub)
+dist/
+*.har
+.DS_Store
+Thumbs.db

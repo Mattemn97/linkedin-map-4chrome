@@ -82,3 +82,5 @@ progress::-webkit-progress-value { background: var(--accent); border-radius: 3px
 
 .note { color: var(--muted); font-size: 12px; }
 .error { color: var(--error); font-weight: 600; }
+.warn { padding: 8px 10px; border-left: 3px solid var(--error); background: var(--accent-soft); border-radius: 4px; }
+code { font-size: 12px; }

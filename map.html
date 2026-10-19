@@ -25,8 +25,63 @@
         <label><input type="checkbox" value="remote" checked><span class="dot remote"></span>Remoto</label>
         <label><input type="checkbox" value="unknown" checked><span class="dot unknown"></span>N/D</label>
       </div>
+
+      <div class="row">
+        <label class="field">Ordina
+          <select id="sort">
+            <option value="newest">Più recenti</option>
+            <option value="oldest">Meno recenti</option>
+            <option value="company">Azienda (A-Z)</option>
+            <option value="title">Titolo (A-Z)</option>
+            <option value="distance">Distanza dal punto</option>
+            <option value="time">Tempo di percorso</option>
+          </select>
+        </label>
+        <label class="field">Pubblicate
+          <select id="posted">
+            <option value="">Sempre</option>
+            <option value="1">Ultime 24 ore</option>
+            <option value="7">Ultima settimana</option>
+            <option value="30">Ultimo mese</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="field">Mostra
+          <select id="show">
+            <option value="active">Tutte tranne nascoste</option>
+            <option value="star">Solo preferite</option>
+            <option value="hidden">Solo nascoste</option>
+            <option value="all">Tutte</option>
+          </select>
+        </label>
+        <details id="regions" class="field dropdown">
+          <summary>Regioni: <span id="regions-label">tutte</span></summary>
+          <div id="regions-list"></div>
+        </details>
+      </div>
+
+      <fieldset class="origin">
+        <legend>Vicino a un punto</legend>
+        <div class="row">
+          <button id="pick" type="button">Scegli punto sulla mappa</button>
+          <button id="unpick" type="button" class="danger" hidden>Rimuovi</button>
+        </div>
+        <div class="row">
+          <label class="field">Entro km <input id="radius" type="number" min="0" step="5" placeholder="tutti"></label>
+          <label class="field">Entro minuti in auto <input id="maxmin" type="number" min="0" step="5" placeholder="tutti"></label>
+        </div>
+        <p id="origin-status" class="note"></p>
+      </fieldset>
+
+      <div class="chips">
+        <label><input id="hide-promoted" type="checkbox">Nascondi promosse</label>
+      </div>
+
       <div class="actions">
         <button id="export" type="button">Esporta CSV</button>
+        <button id="reset" type="button">Azzera filtri</button>
         <button id="clear" type="button" class="danger">Svuota</button>
       </div>
     </div>
@@ -50,6 +105,6 @@
 
   <script src="lib/leaflet/leaflet.js"></script>
   <script src="lib/markercluster/leaflet.markercluster.js"></script>
-  <script src="map.js"></script>
+  <script type="module" src="map.js"></script>
 </body>
 </html>

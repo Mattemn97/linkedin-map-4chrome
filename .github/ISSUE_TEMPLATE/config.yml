@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Domande e idee libere
+    url: https://github.com/Mattemn97/linkedin-map-4chrome/discussions
+    about: Per domande d'uso che non sono bug.
+  - name: Vulnerabilità di sicurezza
+    url: https://github.com/Mattemn97/linkedin-map-4chrome/security/advisories/new
+    about: Segnalale in privato, non con una issue pubblica.
