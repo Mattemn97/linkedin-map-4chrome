@@ -1,0 +1,83 @@
+LinkeMap - versione di prova
+============================
+
+LinkeMap prende le offerte di lavoro di una tua ricerca su LinkedIn
+e le mostra su una mappa, così vedi subito dove si trovano.
+
+Funziona su Google Chrome (anche Edge e Brave) da computer.
+Non è ancora sullo store di Chrome: va installata a mano, ci vogliono 2 minuti.
+
+
+INSTALLAZIONE
+-------------
+
+1. Estrai lo ZIP (tasto destro > "Estrai tutto...").
+   Ottieni una cartella "LinkeMap-x.y.z": mettila in un posto dove
+   non la cancellerai (es. Documenti). Chrome la usa ogni volta che si apre:
+   se la sposti o la elimini, l'estensione smette di funzionare.
+
+2. In Chrome scrivi nella barra degli indirizzi:   chrome://extensions
+   (su Edge: edge://extensions)
+
+3. In alto a destra attiva "Modalità sviluppatore".
+
+4. Clicca "Carica estensione non pacchettizzata" e seleziona la cartella
+   "LinkeMap-x.y.z" (quella che contiene il file manifest.json).
+
+5. Clicca l'icona del puzzle in alto a destra in Chrome e premi la puntina
+   accanto a LinkeMap, così l'icona blu resta sempre visibile.
+
+
+COME SI USA
+-----------
+
+1. Vai su https://www.linkedin.com/jobs/search/ (devi aver fatto l'accesso).
+2. Cerca come fai di solito: parole chiave, località, filtri.
+3. Con quella pagina aperta, clicca l'icona di LinkeMap.
+4. Premi "Importa le offerte di questa ricerca".
+   Scarica 25 offerte ogni 1,5 secondi (massimo 1000): per 300 offerte
+   serve circa mezzo minuto. Puoi chiudere il riquadro, continua da sola.
+5. Premi "Apri la mappa". I segnaposto compaiono man mano
+   (una località al secondo la prima volta, poi è immediato).
+
+Puoi importare più ricerche: le offerte si sommano.
+"Svuota" nella mappa cancella tutto. "Esporta CSV" crea un file per Excel.
+
+
+COSE DA SAPERE
+--------------
+
+- Chrome all'avvio può mostrare un avviso sulle "estensioni in modalità
+  sviluppatore": è normale per le estensioni installate a mano.
+  Chiudilo e basta (non premere "Disattiva").
+
+- La posizione sulla mappa è la città indicata nell'offerta,
+  non l'indirizzo preciso dell'azienda. Le offerte "da remoto" senza città
+  finiscono al centro del paese.
+
+- Privacy: le offerte restano solo nel tuo browser. L'estensione si collega
+  solo a LinkedIn (con il tuo account, come faresti tu scorrendo le pagine),
+  a OpenStreetMap per trovare le coordinate delle città e a Esri per le
+  immagini della mappa. Nessun dato viene inviato allo sviluppatore.
+
+- LinkedIn non ama gli strumenti automatici: l'estensione va piano apposta,
+  ma non lanciare decine di importazioni di fila.
+
+
+AGGIORNARE A UNA NUOVA VERSIONE
+-------------------------------
+
+Sostituisci il contenuto della cartella con quello del nuovo ZIP,
+poi in chrome://extensions premi la freccia circolare sulla scheda di LinkeMap.
+Le offerte già importate restano.
+
+
+SEGNALARE PROBLEMI
+------------------
+
+Mandami:
+- cosa stavi facendo,
+- il messaggio di errore (se c'è) nel riquadro di LinkeMap,
+- uno screenshot.
+Utile anche: in chrome://extensions, sulla scheda di LinkeMap, il pulsante
+"Errori" (se compare) - copiane il contenuto.

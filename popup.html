@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>LinkeMap</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>LinkeMap</h1>
+
+  <section id="not-search" hidden>
+    <p><strong>Apri prima una ricerca di offerte su LinkedIn.</strong></p>
+    <ol>
+      <li>Vai su <a href="https://www.linkedin.com/jobs/search/" target="_blank">linkedin.com/jobs/search</a> (devi essere collegato).</li>
+      <li>Imposta parole chiave, località e filtri.</li>
+      <li>Con quella scheda in primo piano, clicca di nuovo l'icona di LinkeMap.</li>
+    </ol>
+  </section>
+
+  <section id="search" hidden>
+    <p>Ricerca LinkedIn rilevata nella scheda attiva.</p>
+    <button id="import" type="button" class="primary">Importa le offerte di questa ricerca</button>
+    <p class="note">Scarica tutte le pagine dei risultati (max 1000), una ogni 1,5 secondi.</p>
+  </section>
+
+  <section id="progress" hidden>
+    <progress id="bar" max="1" value="0"></progress>
+    <p id="progress-text"></p>
+  </section>
+
+  <p id="error" class="error" hidden></p>
+  <p id="warning" class="note" hidden></p>
+
+  <hr>
+  <button id="open-map" type="button">Apri la mappa</button>
+  <p id="count" class="note"></p>
+
+  <script src="popup.js"></script>
+</body>
+</html>

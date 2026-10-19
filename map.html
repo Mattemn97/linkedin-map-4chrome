@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LinkeMap</title>
+  <link rel="icon" href="icons/icon32.png">
+  <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+  <link rel="stylesheet" href="lib/markercluster/MarkerCluster.css">
+  <link rel="stylesheet" href="lib/markercluster/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="map.css">
+</head>
+<body>
+  <aside id="sidebar">
+    <header>
+      <h1>LinkeMap</h1>
+      <p id="status">Nessuna offerta raccolta.</p>
+    </header>
+
+    <div class="filters">
+      <input id="search" type="search" placeholder="Cerca titolo, azienda, città…">
+      <div class="chips">
+        <label><input type="checkbox" value="onsite" checked><span class="dot onsite"></span>In sede</label>
+        <label><input type="checkbox" value="hybrid" checked><span class="dot hybrid"></span>Ibrido</label>
+        <label><input type="checkbox" value="remote" checked><span class="dot remote"></span>Remoto</label>
+        <label><input type="checkbox" value="unknown" checked><span class="dot unknown"></span>N/D</label>
+      </div>
+      <div class="actions">
+        <button id="export" type="button">Esporta CSV</button>
+        <button id="clear" type="button" class="danger">Svuota</button>
+      </div>
+    </div>
+
+    <ul id="list"></ul>
+    <p class="hint">Per aggiungere offerte: apri una ricerca su linkedin.com/jobs/search, clicca l'icona di LinkeMap e premi «Importa». La mappa si aggiorna da sola.</p>
+  </aside>
+
+  <main id="map"></main>
+
+  <div id="empty" class="empty-state">
+    <h2>Nessuna offerta ancora</h2>
+    <ol>
+      <li>In un'altra scheda apri <a href="https://www.linkedin.com/jobs/search/" target="_blank" rel="noopener">linkedin.com/jobs/search</a> (da collegato).</li>
+      <li>Imposta parole chiave, località e filtri come fai di solito.</li>
+      <li>Con quella scheda in primo piano clicca l'icona di LinkeMap nella barra di Chrome (se non la vedi, è sotto l'icona del puzzle).</li>
+      <li>Premi <strong>«Importa le offerte di questa ricerca»</strong>.</li>
+    </ol>
+    <p>Le offerte compaiono qui mentre vengono scaricate; le posizioni arrivano a una località al secondo.</p>
+  </div>
+
+  <script src="lib/leaflet/leaflet.js"></script>
+  <script src="lib/markercluster/leaflet.markercluster.js"></script>
+  <script src="map.js"></script>
+</body>
+</html>
