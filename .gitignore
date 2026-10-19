@@ -3,3 +3,6 @@ dist/
 *.har
 .DS_Store
 Thumbs.db
+
+# Impostazioni personali di Claude Code
+.claude/settings.local.json
