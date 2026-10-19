@@ -52,6 +52,8 @@ Stored in `docs/specs/`. Format: `docs/specs/NNNN-title.md`.
 
 ## Agent skills
 
+Skill di workflow in `.claude/skills/` (`jsmastery-pro/skills`, versioni in `skills-lock.json`): `/scope`, `/architect`, `/develop`, `/check`, `/test`, `/debug`, `/document`, `/sync`, `/audit`.
+
 Declined: ricerca di Agent Skills e MCP per lo stack (Chrome MV3, Leaflet, Nominatim)
 
 ## Context files
