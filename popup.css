@@ -1,26 +1,26 @@
 /* Stessa palette ispirata a LinkedIn della mappa. */
 :root {
   --surface: #ffffff;
-  --text: rgba(0, 0, 0, .9);
-  --muted: rgba(0, 0, 0, .6);
-  --border: rgba(0, 0, 0, .12);
+  --text: rgba(0, 0, 0, 0.9);
+  --muted: rgba(0, 0, 0, 0.6);
+  --border: rgba(0, 0, 0, 0.12);
   --track: #e8e8e8;
   --accent: #0a66c2;
   --accent-strong: #004182;
-  --accent-soft: rgba(112, 181, 249, .2);
+  --accent-soft: rgba(112, 181, 249, 0.2);
   --on-accent: #ffffff;
   --error: #cc1016;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --surface: #1b1f23;
-    --text: rgba(255, 255, 255, .9);
-    --muted: rgba(255, 255, 255, .6);
-    --border: rgba(255, 255, 255, .12);
+    --text: rgba(255, 255, 255, 0.9);
+    --muted: rgba(255, 255, 255, 0.6);
+    --border: rgba(255, 255, 255, 0.12);
     --track: #38434f;
     --accent: #71b7fb;
     --accent-strong: #a8d4ff;
-    --accent-soft: rgba(113, 183, 251, .15);
+    --accent-soft: rgba(113, 183, 251, 0.15);
     --on-accent: #000000;
     --error: #f87171;
   }
@@ -32,15 +32,45 @@ body {
   padding: 16px;
   background: var(--surface);
   color: var(--text);
-  font: 14px/1.43 -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font:
+    14px/1.43 -apple-system,
+    system-ui,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
 }
-h1 { margin: 0 0 8px; font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: -.2px; }
-p { margin: 6px 0; }
-ol { margin: 6px 0; padding-left: 18px; }
-li { margin: 3px 0; }
-a { color: var(--accent); font-weight: 600; text-decoration: none; }
-a:hover { text-decoration: underline; }
-hr { border: 0; border-top: 1px solid var(--border); margin: 14px 0; }
+h1 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.2px;
+}
+p {
+  margin: 6px 0;
+}
+ol {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+li {
+  margin: 3px 0;
+}
+a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 14px 0;
+}
 
 /* Pulsanti LinkedIn: primario pieno blu, secondario con bordo blu. */
 button {
@@ -55,12 +85,25 @@ button {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background .15s, box-shadow .15s;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
 }
-button:hover { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
-button.primary { background: var(--accent); color: var(--on-accent); }
-button.primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); box-shadow: none; }
-button:disabled, button:disabled:hover {
+button:hover {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+button.primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+button.primary:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  box-shadow: none;
+}
+button:disabled,
+button:disabled:hover {
   background: var(--track);
   border-color: var(--track);
   color: var(--muted);
@@ -77,10 +120,28 @@ progress {
   appearance: none;
   background: var(--track);
 }
-progress::-webkit-progress-bar { background: var(--track); }
-progress::-webkit-progress-value { background: var(--accent); border-radius: 3px; }
+progress::-webkit-progress-bar {
+  background: var(--track);
+}
+progress::-webkit-progress-value {
+  background: var(--accent);
+  border-radius: 3px;
+}
 
-.note { color: var(--muted); font-size: 12px; }
-.error { color: var(--error); font-weight: 600; }
-.warn { padding: 8px 10px; border-left: 3px solid var(--error); background: var(--accent-soft); border-radius: 4px; }
-code { font-size: 12px; }
+.note {
+  color: var(--muted);
+  font-size: 12px;
+}
+.error {
+  color: var(--error);
+  font-weight: 600;
+}
+.warn {
+  padding: 8px 10px;
+  border-left: 3px solid var(--error);
+  background: var(--accent-soft);
+  border-radius: 4px;
+}
+code {
+  font-size: 12px;
+}

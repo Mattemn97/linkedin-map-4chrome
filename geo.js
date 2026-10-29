@@ -14,7 +14,17 @@ const COUNTRIES = {
   at: ['austria', 'österreich'],
   es: ['spagna', 'spain', 'españa'],
   pt: ['portogallo', 'portugal'],
-  gb: ['regno unito', 'united kingdom', 'uk', 'inghilterra', 'england', 'scotland', 'scozia', 'wales', 'galles'],
+  gb: [
+    'regno unito',
+    'united kingdom',
+    'uk',
+    'inghilterra',
+    'england',
+    'scotland',
+    'scozia',
+    'wales',
+    'galles',
+  ],
   ie: ['irlanda', 'ireland'],
   nl: ['paesi bassi', 'olanda', 'netherlands', 'the netherlands', 'nederland'],
   be: ['belgio', 'belgium', 'belgië', 'belgique'],
@@ -42,7 +52,7 @@ const COUNTRIES = {
   al: ['albania'],
   ua: ['ucraina', 'ukraine'],
   tr: ['turchia', 'turkey', 'türkiye'],
-  us: ['stati uniti', 'stati uniti d\'america', 'united states', 'united states of america', 'usa'],
+  us: ['stati uniti', "stati uniti d'america", 'united states', 'united states of america', 'usa'],
   ca: ['canada'],
   mx: ['messico', 'mexico'],
   br: ['brasile', 'brazil'],
@@ -61,9 +71,18 @@ const COUNTRIES = {
 };
 const BY_NAME = new Map(Object.entries(COUNTRIES).flatMap(([cc, names]) => names.map(n => [n, cc])));
 
-export const countryCode = name => BY_NAME.get(String(name ?? '').trim().toLowerCase()) ?? null;
+export const countryCode = name =>
+  BY_NAME.get(
+    String(name ?? '')
+      .trim()
+      .toLowerCase(),
+  ) ?? null;
 
-const lastPart = s => String(s ?? '').split(',').at(-1).trim();
+const lastPart = s =>
+  String(s ?? '')
+    .split(',')
+    .at(-1)
+    .trim();
 
 // Chiave di cache e di ricerca: toglie "Area metropolitana di" e simili, aggiunge il paese
 // (della località o, se manca, della ricerca) come codice ISO dopo "|".
@@ -83,7 +102,10 @@ const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
 // è fallita (rete o rate limit: si riprova più tardi). `pause` separa le richieste (policy 1/s).
 export async function geocode(key, pause) {
   const [loc, cc = null] = key.split('|');
-  const parts = loc.split(',').map(s => s.trim()).filter(Boolean);
+  const parts = loc
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
   if (countryCode(parts.at(-1))) parts.pop(); // il paese è già in cc
   const base = cc ? { countrycodes: cc } : {};
 
@@ -104,8 +126,28 @@ export async function geocode(key, pause) {
   return { fail: true };
 }
 
+// Indirizzo scritto dall'utente (punto di partenza della mappa) -> {lat, lon, label}.
+// Ritorna null se non trovato, undefined se la richiesta è fallita.
+export async function searchPlace(text) {
+  const qs = new URLSearchParams({ format: 'jsonv2', limit: '1', 'accept-language': 'it', q: text });
+  try {
+    const res = await fetch(`${NOMINATIM}?${qs}`, { headers: { Accept: 'application/json' } });
+    if (!res.ok) return undefined;
+    const [hit] = await res.json();
+    return hit ? { lat: Number(hit.lat), lon: Number(hit.lon), label: hit.display_name } : null;
+  } catch {
+    return undefined;
+  }
+}
+
 async function nominatim(params) {
-  const qs = new URLSearchParams({ format: 'jsonv2', limit: '1', addressdetails: '1', 'accept-language': 'it', ...params });
+  const qs = new URLSearchParams({
+    format: 'jsonv2',
+    limit: '1',
+    addressdetails: '1',
+    'accept-language': 'it',
+    ...params,
+  });
   try {
     const res = await fetch(`${NOMINATIM}?${qs}`, { headers: { Accept: 'application/json' } });
     if (!res.ok) return undefined;

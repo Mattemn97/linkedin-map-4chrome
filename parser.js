@@ -4,9 +4,12 @@ const CARD_TYPE = 'com.linkedin.voyager.dash.jobs.JobPostingCard';
 const GEO_TYPE = 'com.linkedin.voyager.dash.common.Geo';
 
 const WORKPLACE = {
-  'in sede': 'onsite', 'on-site': 'onsite',
-  'ibrido': 'hybrid', 'hybrid': 'hybrid',
-  'da remoto': 'remote', 'remote': 'remote',
+  'in sede': 'onsite',
+  'on-site': 'onsite',
+  ibrido: 'hybrid',
+  hybrid: 'hybrid',
+  'da remoto': 'remote',
+  remote: 'remote',
 };
 
 export function parseJobCards(json) {
@@ -56,7 +59,7 @@ export function mergeJob(prev, next) {
 
 function pickLogo(img) {
   if (!img?.rootUrl || !img.artifacts?.length) return null;
-  const art = [...img.artifacts].sort((a, b) => a.width - b.width)
-    .find(a => a.width >= 100) ?? img.artifacts[0];
+  const art =
+    [...img.artifacts].sort((a, b) => a.width - b.width).find(a => a.width >= 100) ?? img.artifacts[0];
   return img.rootUrl + art.fileIdentifyingUrlPathSegment;
 }

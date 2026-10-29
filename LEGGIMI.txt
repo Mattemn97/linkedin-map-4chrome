@@ -47,8 +47,11 @@ Puoi importare più ricerche: le offerte si sommano.
 
 Nella mappa puoi filtrare per regione e per data, ordinare le offerte,
 segnarle come preferite (stella) o nasconderle (X).
-Per cercare vicino a casa: "Scegli punto sulla mappa", clicca il punto,
-poi scrivi "Entro km" oppure "Entro minuti in auto".
+Per cercare vicino a casa: scrivi l'indirizzo e premi "Cerca" (oppure
+"Scegli punto sulla mappa" e clicca il punto), poi scrivi "Entro km"
+oppure "Entro minuti in auto".
+Dopo ogni importazione le offerte mai viste prima hanno l'etichetta "nuova":
+nel menu "Mostra" scegli "Nuove dell'ultima importazione" per vedere solo quelle.
 
 
 COSE DA SAPERE

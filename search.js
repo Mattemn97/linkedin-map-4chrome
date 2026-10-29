@@ -21,7 +21,13 @@ const FILTERS = {
   f_JIYN: 'earlyApplicant',
 };
 
-const parseUrl = url => { try { return new URL(url); } catch { return null; } };
+const parseUrl = url => {
+  try {
+    return new URL(url);
+  } catch {
+    return null;
+  }
+};
 const onLinkedIn = u => u?.hostname === 'www.linkedin.com';
 
 // Ricerca classica: è l'unica che l'importazione sa tradurre nella chiamata API.
@@ -41,20 +47,22 @@ export function classicSearchUrl(url) {
   const src = parseUrl(url)?.searchParams ?? new URLSearchParams();
   const out = new URLSearchParams();
   for (const [k, v] of src) {
-    if (['keywords', 'geoId', 'location', 'distance', 'sortBy'].includes(k) || k.startsWith('f_')) out.set(k, v);
+    if (['keywords', 'geoId', 'location', 'distance', 'sortBy'].includes(k) || k.startsWith('f_'))
+      out.set(k, v);
   }
   return `https://www.linkedin.com/jobs/search/?${out}`;
 }
 
 // Codifica un valore stringa per Rest.li 2.0: tutto ciò che non è alfanumerico va in %XX.
-const enc = v => encodeURIComponent(v).replace(/[()'!*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
+const enc = v =>
+  encodeURIComponent(v).replace(/[()'!*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
 const list = values => `List(${values.map(enc).join(',')})`;
 
 // Ritorna { query, ignored } dove query è il valore Rest.li del parametro "query"
 // e ignored elenca i filtri dell'URL che non sappiamo tradurre.
 export function buildSearchQuery(pageUrl) {
   const params = new URL(pageUrl).searchParams;
-  const parts = [`origin:${params.get('origin') || 'JOB_SEARCH_PAGE_JOB_FILTER'}`];
+  const parts = [`origin:${enc(params.get('origin') || 'JOB_SEARCH_PAGE_JOB_FILTER')}`];
   const ignored = [];
 
   const keywords = params.get('keywords')?.trim();
@@ -71,7 +79,10 @@ export function buildSearchQuery(pageUrl) {
   for (const [key, value] of params) {
     if (!key.startsWith('f_')) continue;
     const name = FILTERS[key];
-    const values = value.split(',').map(s => s.trim()).filter(Boolean);
+    const values = value
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
     if (!name) ignored.push(key);
     else if (values.length) filters.push(`${name}:${list(values)}`);
   }
@@ -81,6 +92,8 @@ export function buildSearchQuery(pageUrl) {
 }
 
 export function buildApiUrl(query, start, decoration = DEFAULT_DECORATION) {
-  return 'https://www.linkedin.com/voyager/api/voyagerJobsDashJobCards' +
-    `?decorationId=${decoration}&count=${PAGE_SIZE}&q=jobSearch&query=${query}&start=${start}`;
+  return (
+    'https://www.linkedin.com/voyager/api/voyagerJobsDashJobCards' +
+    `?decorationId=${decoration}&count=${PAGE_SIZE}&q=jobSearch&query=${query}&start=${start}`
+  );
 }
