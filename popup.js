@@ -31,9 +31,11 @@ function renderImport(s) {
 
   $('bar').max = s.total || 1;
   $('bar').value = s.total ? s.fetched : 0;
+  // Gli stati della 0.4.0 (senza startedAt) usavano added per il totale delle offerte salvate.
+  const added = s.startedAt && s.added ? `, ${s.added === 1 ? '1 nuova' : `${s.added} nuove`}` : '';
   $('progress-text').textContent = s.running
-    ? `Importazione in corso… ${s.fetched}${s.total ? ` / ${s.total}` : ''} offerte`
-    : `Ultima importazione: ${s.fetched} offerte lette${s.total ? ` su ${s.total}` : ''}.`;
+    ? `Importazione in corso… ${s.fetched}${s.total ? ` / ${s.total}` : ''} offerte${added}`
+    : `Ultima importazione: ${s.fetched} offerte lette${s.total ? ` su ${s.total}` : ''}${added}.`;
   $('error').textContent = s.error ?? '';
   $('warning').textContent = s.ignored?.length
     ? `Filtri non supportati e ignorati: ${s.ignored.join(', ')}.`

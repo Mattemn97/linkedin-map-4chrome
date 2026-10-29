@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "LinkeMap",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Importa le offerte di una ricerca LinkedIn Jobs e le mostra su una mappa, con filtri per regione, distanza e tempo di percorso.",
   "homepage_url": "https://github.com/Mattemn97/linkedin-map-4chrome",
   "icons": {

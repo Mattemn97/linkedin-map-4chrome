@@ -1,110 +1,147 @@
 <!doctype html>
 <html lang="it">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LinkeMap</title>
-  <link rel="icon" href="icons/icon32.png">
-  <link rel="stylesheet" href="lib/leaflet/leaflet.css">
-  <link rel="stylesheet" href="lib/markercluster/MarkerCluster.css">
-  <link rel="stylesheet" href="lib/markercluster/MarkerCluster.Default.css">
-  <link rel="stylesheet" href="map.css">
-</head>
-<body>
-  <aside id="sidebar">
-    <header>
-      <h1>LinkeMap</h1>
-      <p id="status">Nessuna offerta raccolta.</p>
-    </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LinkeMap</title>
+    <link rel="icon" href="icons/icon32.png" />
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="lib/markercluster/MarkerCluster.css" />
+    <link rel="stylesheet" href="lib/markercluster/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="map.css" />
+  </head>
+  <body>
+    <aside id="sidebar">
+      <header>
+        <h1>LinkeMap</h1>
+        <p id="status">Nessuna offerta raccolta.</p>
+      </header>
 
-    <div class="filters">
-      <input id="search" type="search" placeholder="Cerca titolo, azienda, città…">
-      <div class="chips">
-        <label><input type="checkbox" value="onsite" checked><span class="dot onsite"></span>In sede</label>
-        <label><input type="checkbox" value="hybrid" checked><span class="dot hybrid"></span>Ibrido</label>
-        <label><input type="checkbox" value="remote" checked><span class="dot remote"></span>Remoto</label>
-        <label><input type="checkbox" value="unknown" checked><span class="dot unknown"></span>N/D</label>
-      </div>
-
-      <div class="row">
-        <label class="field">Ordina
-          <select id="sort">
-            <option value="newest">Più recenti</option>
-            <option value="oldest">Meno recenti</option>
-            <option value="company">Azienda (A-Z)</option>
-            <option value="title">Titolo (A-Z)</option>
-            <option value="distance">Distanza dal punto</option>
-            <option value="time">Tempo di percorso</option>
-          </select>
-        </label>
-        <label class="field">Pubblicate
-          <select id="posted">
-            <option value="">Sempre</option>
-            <option value="1">Ultime 24 ore</option>
-            <option value="7">Ultima settimana</option>
-            <option value="30">Ultimo mese</option>
-          </select>
-        </label>
-      </div>
-
-      <div class="row">
-        <label class="field">Mostra
-          <select id="show">
-            <option value="active">Tutte tranne nascoste</option>
-            <option value="star">Solo preferite</option>
-            <option value="hidden">Solo nascoste</option>
-            <option value="all">Tutte</option>
-          </select>
-        </label>
-        <details id="regions" class="field dropdown">
-          <summary>Regioni: <span id="regions-label">tutte</span></summary>
-          <div id="regions-list"></div>
-        </details>
-      </div>
-
-      <fieldset class="origin">
-        <legend>Vicino a un punto</legend>
-        <div class="row">
-          <button id="pick" type="button">Scegli punto sulla mappa</button>
-          <button id="unpick" type="button" class="danger" hidden>Rimuovi</button>
+      <div class="filters">
+        <input id="search" type="search" placeholder="Cerca titolo, azienda, città…" />
+        <div class="chips">
+          <label
+            ><input type="checkbox" value="onsite" checked /><span class="dot onsite"></span>In sede</label
+          >
+          <label
+            ><input type="checkbox" value="hybrid" checked /><span class="dot hybrid"></span>Ibrido</label
+          >
+          <label
+            ><input type="checkbox" value="remote" checked /><span class="dot remote"></span>Remoto</label
+          >
+          <label><input type="checkbox" value="unknown" checked /><span class="dot unknown"></span>N/D</label>
         </div>
+
         <div class="row">
-          <label class="field">Entro km <input id="radius" type="number" min="0" step="5" placeholder="tutti"></label>
-          <label class="field">Entro minuti in auto <input id="maxmin" type="number" min="0" step="5" placeholder="tutti"></label>
+          <label class="field"
+            >Ordina
+            <select id="sort">
+              <option value="newest">Più recenti</option>
+              <option value="oldest">Meno recenti</option>
+              <option value="company">Azienda (A-Z)</option>
+              <option value="title">Titolo (A-Z)</option>
+              <option value="distance">Distanza dal punto</option>
+              <option value="time">Tempo di percorso</option>
+            </select>
+          </label>
+          <label class="field"
+            >Pubblicate
+            <select id="posted">
+              <option value="">Sempre</option>
+              <option value="1">Ultime 24 ore</option>
+              <option value="7">Ultima settimana</option>
+              <option value="30">Ultimo mese</option>
+            </select>
+          </label>
         </div>
-        <p id="origin-status" class="note"></p>
-      </fieldset>
 
-      <div class="chips">
-        <label><input id="hide-promoted" type="checkbox">Nascondi promosse</label>
+        <div class="row">
+          <label class="field"
+            >Mostra
+            <select id="show">
+              <option value="active">Tutte tranne nascoste</option>
+              <option value="new">Nuove dell'ultima importazione</option>
+              <option value="star">Solo preferite</option>
+              <option value="hidden">Solo nascoste</option>
+              <option value="all">Tutte</option>
+            </select>
+          </label>
+          <details id="regions" class="field dropdown">
+            <summary>Regioni: <span id="regions-label">tutte</span></summary>
+            <div id="regions-list"></div>
+          </details>
+        </div>
+
+        <fieldset class="origin">
+          <legend>Vicino a un punto</legend>
+          <form id="address-form" class="row">
+            <input
+              id="address"
+              type="search"
+              placeholder="Indirizzo o città (es. Via Roma 1, Mantova)"
+              aria-label="Indirizzo del punto di partenza"
+            />
+            <button type="submit">Cerca</button>
+          </form>
+          <div class="row">
+            <button id="pick" type="button">Scegli punto sulla mappa</button>
+            <button id="unpick" type="button" class="danger" hidden>Rimuovi</button>
+          </div>
+          <div class="row">
+            <label class="field"
+              >Entro km <input id="radius" type="number" min="0" step="5" placeholder="tutti"
+            /></label>
+            <label class="field"
+              >Entro minuti in auto <input id="maxmin" type="number" min="0" step="5" placeholder="tutti"
+            /></label>
+          </div>
+          <p id="origin-status" class="note"></p>
+        </fieldset>
+
+        <div class="chips">
+          <label><input id="hide-promoted" type="checkbox" />Nascondi promosse</label>
+        </div>
+
+        <div class="actions">
+          <button id="export" type="button">Esporta CSV</button>
+          <button id="reset" type="button">Azzera filtri</button>
+          <button id="clear" type="button" class="danger">Svuota</button>
+        </div>
       </div>
 
-      <div class="actions">
-        <button id="export" type="button">Esporta CSV</button>
-        <button id="reset" type="button">Azzera filtri</button>
-        <button id="clear" type="button" class="danger">Svuota</button>
-      </div>
+      <ul id="list"></ul>
+      <p class="hint">
+        Per aggiungere offerte: apri una ricerca su linkedin.com/jobs/search, clicca l'icona di LinkeMap e
+        premi «Importa». La mappa si aggiorna da sola.
+      </p>
+    </aside>
+
+    <main id="map"></main>
+
+    <div id="empty" class="empty-state">
+      <h2>Nessuna offerta ancora</h2>
+      <ol>
+        <li>
+          In un'altra scheda apri
+          <a href="https://www.linkedin.com/jobs/search/" target="_blank" rel="noopener"
+            >linkedin.com/jobs/search</a
+          >
+          (da collegato).
+        </li>
+        <li>Imposta parole chiave, località e filtri come fai di solito.</li>
+        <li>
+          Con quella scheda in primo piano clicca l'icona di LinkeMap nella barra di Chrome (se non la vedi, è
+          sotto l'icona del puzzle).
+        </li>
+        <li>Premi <strong>«Importa le offerte di questa ricerca»</strong>.</li>
+      </ol>
+      <p>
+        Le offerte compaiono qui mentre vengono scaricate; le posizioni arrivano a una località al secondo.
+      </p>
     </div>
 
-    <ul id="list"></ul>
-    <p class="hint">Per aggiungere offerte: apri una ricerca su linkedin.com/jobs/search, clicca l'icona di LinkeMap e premi «Importa». La mappa si aggiorna da sola.</p>
-  </aside>
-
-  <main id="map"></main>
-
-  <div id="empty" class="empty-state">
-    <h2>Nessuna offerta ancora</h2>
-    <ol>
-      <li>In un'altra scheda apri <a href="https://www.linkedin.com/jobs/search/" target="_blank" rel="noopener">linkedin.com/jobs/search</a> (da collegato).</li>
-      <li>Imposta parole chiave, località e filtri come fai di solito.</li>
-      <li>Con quella scheda in primo piano clicca l'icona di LinkeMap nella barra di Chrome (se non la vedi, è sotto l'icona del puzzle).</li>
-      <li>Premi <strong>«Importa le offerte di questa ricerca»</strong>.</li>
-    </ol>
-    <p>Le offerte compaiono qui mentre vengono scaricate; le posizioni arrivano a una località al secondo.</p>
-  </div>
-
-  <script src="lib/leaflet/leaflet.js"></script>
-  <script src="lib/markercluster/leaflet.markercluster.js"></script>
-  <script type="module" src="map.js"></script>
-</body>
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="lib/markercluster/leaflet.markercluster.js"></script>
+    <script type="module" src="map.js"></script>
+  </body>
 </html>

@@ -18,9 +18,10 @@ da un punto a tua scelta. Funziona anche su Edge e Brave.
 - Mappa con segnaposto raggruppati, colorati per modalità (in sede, ibrido, da remoto).
 - Posizioni corrette per paese e regione (geocoding Nominatim vincolato al paese).
 - Filtri: testo, modalità, **regione**, data di pubblicazione, offerte promosse.
-- **Vicino a un punto**: clicca sulla mappa, poi filtra per raggio in km o per minuti in auto (OSRM).
+- **Vicino a un punto**: scrivi un indirizzo o clicca sulla mappa, poi filtra per raggio in km o per minuti in auto (OSRM).
 - Ordina per data, azienda, titolo, distanza o tempo di percorso.
 - Segna le offerte come **preferite** o **nascoste** per mettere ordine.
+- Le offerte **nuove** dell'ultima importazione hanno un'etichetta e un filtro dedicato.
 - Esporta in CSV (per Excel) le offerte filtrate, con distanze e tempi.
 - I dati restano nel tuo browser: nessun server, nessun account.
 
@@ -43,7 +44,7 @@ estrailo e segui `LEGGIMI.txt`.
    L'estensione scarica 25 offerte ogni 1,5 secondi (massimo 1000).
 3. Premi **«Apri la mappa»**. Le offerte compaiono subito nella lista; i segnaposto arrivano man mano
    che le località vengono geolocalizzate (una al secondo, poi restano in cache).
-4. Per cercare vicino a casa: **«Scegli punto sulla mappa»**, clicca il punto, poi imposta «Entro km» o «Entro minuti in auto».
+4. Per cercare vicino a casa: scrivi l'indirizzo e premi **«Cerca»** (oppure **«Scegli punto sulla mappa»** e clicca il punto), poi imposta «Entro km» o «Entro minuti in auto».
 
 Ripetendo l'importazione con altre ricerche le offerte si sommano. «Svuota» le cancella.
 

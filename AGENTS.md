@@ -23,6 +23,10 @@ Tracer Bullet (ogni funzione costruita da capo a fondo, piccola ma completa). Wo
 powershell -ExecutionPolicy Bypass -File build.ps1   # Windows
 sh build.sh                                        # macOS, Linux
 
+# Formattazione e lint (Node richiesto, nessuna installazione nel progetto)
+npx prettier --write .
+npx eslint .
+
 # Test: nessun test automatico al momento
 ```
 
@@ -33,6 +37,7 @@ Stored in `docs/specs/`. Format: `docs/specs/NNNN-title.md`.
 ## Rules
 
 - Testi per l'utente, commenti e messaggi d'errore sono in italiano.
+- Codice formattato con Prettier (`.prettierrc.json`) e controllato con ESLint (`eslint.config.js`, senza dipendenze); `lib/` è esclusa.
 - Stato condiviso solo in `chrome.storage.local` (`jobs`, `geocache2`, `importState`, `marks`, `mapPrefs`, schema in testa a `background.js`). Popup e mappa si aggiornano ascoltando `chrome.storage.onChanged`, non tramite messaggi.
 - Le richieste a LinkedIn partono dentro la scheda LinkedIn (`chrome.scripting.executeScript` con `fetchInPage`), con header `csrf-token` preso dal cookie `JSESSIONID`. Non spostarle nel service worker.
 - Rispetta i ritmi: Nominatim e OSRM al massimo 1 richiesta al secondo, pagine LinkedIn ogni 1,5 s (`PAGE_DELAY_MS`), massimo 1000 risultati.

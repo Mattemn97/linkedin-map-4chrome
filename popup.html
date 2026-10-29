@@ -1,52 +1,72 @@
 <!doctype html>
 <html lang="it">
-<head>
-  <meta charset="utf-8">
-  <title>LinkeMap</title>
-  <link rel="stylesheet" href="popup.css">
-</head>
-<body>
-  <h1>LinkeMap</h1>
+  <head>
+    <meta charset="utf-8" />
+    <title>LinkeMap</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>LinkeMap</h1>
 
-  <section id="not-search" hidden>
-    <p><strong>Apri prima una ricerca di offerte su LinkedIn.</strong></p>
-    <ol>
-      <li>Vai su <a href="https://www.linkedin.com/jobs/search/" target="_blank">linkedin.com/jobs/search</a> (devi essere collegato).</li>
-      <li>Usa la <strong>ricerca classica</strong>: se vedi la casella di ricerca con l'AI di LinkedIn, disattivala.</li>
-      <li>Imposta parole chiave, località e filtri.</li>
-      <li>Con quella scheda in primo piano, clicca di nuovo l'icona di LinkeMap.</li>
-    </ol>
-  </section>
+    <section id="not-search" hidden>
+      <p><strong>Apri prima una ricerca di offerte su LinkedIn.</strong></p>
+      <ol>
+        <li>
+          Vai su
+          <a href="https://www.linkedin.com/jobs/search/" target="_blank">linkedin.com/jobs/search</a> (devi
+          essere collegato).
+        </li>
+        <li>
+          Usa la <strong>ricerca classica</strong>: se vedi la casella di ricerca con l'AI di LinkedIn,
+          disattivala.
+        </li>
+        <li>Imposta parole chiave, località e filtri.</li>
+        <li>Con quella scheda in primo piano, clicca di nuovo l'icona di LinkeMap.</li>
+      </ol>
+    </section>
 
-  <section id="ai-search" hidden>
-    <p class="warn"><strong>Questa è la ricerca con AI di LinkedIn.</strong> LinkeMap legge solo la ricerca classica.</p>
-    <ol>
-      <li>Disattiva la ricerca con AI (l'interruttore o il link «ricerca classica» vicino alla casella di ricerca), oppure premi il pulsante qui sotto.</li>
-      <li>Controlla che l'indirizzo inizi con <code>linkedin.com/jobs/search/</code> e che filtri e località siano quelli giusti.</li>
-      <li>Riapri LinkeMap e premi «Importa».</li>
-    </ol>
-    <button id="open-classic" type="button" class="primary">Apri questa ricerca in modalità classica</button>
-  </section>
+    <section id="ai-search" hidden>
+      <p class="warn">
+        <strong>Questa è la ricerca con AI di LinkedIn.</strong> LinkeMap legge solo la ricerca classica.
+      </p>
+      <ol>
+        <li>
+          Disattiva la ricerca con AI (l'interruttore o il link «ricerca classica» vicino alla casella di
+          ricerca), oppure premi il pulsante qui sotto.
+        </li>
+        <li>
+          Controlla che l'indirizzo inizi con <code>linkedin.com/jobs/search/</code> e che filtri e località
+          siano quelli giusti.
+        </li>
+        <li>Riapri LinkeMap e premi «Importa».</li>
+      </ol>
+      <button id="open-classic" type="button" class="primary">
+        Apri questa ricerca in modalità classica
+      </button>
+    </section>
 
-  <section id="search" hidden>
-    <p>Ricerca LinkedIn rilevata nella scheda attiva.</p>
-    <button id="import" type="button" class="primary">Importa le offerte di questa ricerca</button>
-    <p class="note">Scarica tutte le pagine dei risultati (max 1000), una ogni 1,5 secondi.</p>
-    <p class="note">Usa la ricerca classica, non quella con AI: i filtri che vedi nella pagina sono quelli che verranno importati.</p>
-  </section>
+    <section id="search" hidden>
+      <p>Ricerca LinkedIn rilevata nella scheda attiva.</p>
+      <button id="import" type="button" class="primary">Importa le offerte di questa ricerca</button>
+      <p class="note">Scarica tutte le pagine dei risultati (max 1000), una ogni 1,5 secondi.</p>
+      <p class="note">
+        Usa la ricerca classica, non quella con AI: i filtri che vedi nella pagina sono quelli che verranno
+        importati.
+      </p>
+    </section>
 
-  <section id="progress" hidden>
-    <progress id="bar" max="1" value="0"></progress>
-    <p id="progress-text"></p>
-  </section>
+    <section id="progress" hidden>
+      <progress id="bar" max="1" value="0"></progress>
+      <p id="progress-text"></p>
+    </section>
 
-  <p id="error" class="error" hidden></p>
-  <p id="warning" class="note" hidden></p>
+    <p id="error" class="error" hidden></p>
+    <p id="warning" class="note" hidden></p>
 
-  <hr>
-  <button id="open-map" type="button">Apri la mappa</button>
-  <p id="count" class="note"></p>
+    <hr />
+    <button id="open-map" type="button">Apri la mappa</button>
+    <p id="count" class="note"></p>
 
-  <script type="module" src="popup.js"></script>
-</body>
+    <script type="module" src="popup.js"></script>
+  </body>
 </html>

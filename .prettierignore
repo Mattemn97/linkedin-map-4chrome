@@ -1,0 +1,6 @@
+# Librerie di terze parti, pacchetti generati e skill importate: non si formattano.
+lib/
+dist/
+.claude/
+*.md
+skills-lock.json
