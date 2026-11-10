@@ -6,3 +6,6 @@ Thumbs.db
 
 # Impostazioni personali di Claude Code
 .claude/settings.local.json
+
+# Sito di presentazione generato da build-site.sh
+_site/

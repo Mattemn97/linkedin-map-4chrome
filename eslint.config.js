@@ -14,11 +14,13 @@ const browser = Object.fromEntries(
     'matchMedia',
     'confirm',
     'navigator',
+    'Event',
+    'structuredClone',
   ].map(name => [name, 'readonly']),
 );
 
 export default [
-  { ignores: ['lib/', 'dist/', '.claude/'] },
+  { ignores: ['lib/', 'dist/', '_site/', '.claude/'] },
   {
     files: ['**/*.js'],
     languageOptions: {
