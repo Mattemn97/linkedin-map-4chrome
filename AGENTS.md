@@ -54,6 +54,7 @@ Stored in `docs/specs/`. Format: `docs/specs/NNNN-title.md`.
 - Le tile OSM e CARTO rifiutano le pagine `chrome-extension://` (niente Referer): per questo si usano le basemap Esri.
 - Se LinkedIn cambia l'API (errore 400) servono un nuovo log HAR e l'aggiornamento di `search.js`/`parser.js`.
 - `dist/` è ignorata da git: gli zip si allegano alle release GitHub.
+- Il sito (`site/`, `build-site.sh`) carica `map.html`, `map.js`, `map.css` e `geo.js` veri con un `chrome` finto: se cambiano le chiavi dello storage o i messaggi al service worker, aggiorna `site/demo/chrome-finto.js`.
 
 ## Agent skills
 

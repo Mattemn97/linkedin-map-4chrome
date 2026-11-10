@@ -8,6 +8,8 @@ Estensione per Google Chrome (Manifest V3) che importa le offerte di una ricerca
 su una **mappa interattiva**, con filtri per **regione**, **distanza in km** e **tempo di percorso in auto**
 da un punto a tua scelta. Funziona anche su Edge e Brave.
 
+**▶ Prova la mappa nel browser, con offerte inventate: [mattemn97.github.io/linkedin-map-4chrome](https://mattemn97.github.io/linkedin-map-4chrome/)** · [Privacy](https://mattemn97.github.io/linkedin-map-4chrome/privacy.html)
+
 > **English**: LinkeMap is a Chrome extension that imports the results of a LinkedIn Jobs search and plots them
 > on an interactive map (Leaflet + OpenStreetMap geocoding), with filters by region, straight line distance and
 > driving time from any point, sorting, favourites and CSV export. The UI is in Italian; issues and PRs in English are welcome.
@@ -87,6 +89,10 @@ I file inclusi sono elencati in `build-files.txt`. Le icone in `icons/` sono gen
 - Il tempo di percorso è una stima in auto senza traffico; a piedi, in bici e con i mezzi non sono supportati.
 - L'importazione fa richieste automatiche all'API interna di LinkedIn con il tuo account: i Termini di Servizio
   di LinkedIn vietano lo scraping automatico. Usala con moderazione. Progetto non affiliato a LinkedIn.
+
+## Sito e demo
+
+Il sito di presentazione sta in `site/`: home, informativa sulla privacy (l'indirizzo da indicare nel Chrome Web Store) e la demo, che è la `map.html` vera con `site/demo/chrome-finto.js` al posto delle API di Chrome e le offerte inventate di `site/demo/dati.js`. `sh build-site.sh` crea `_site/`. Per pubblicarlo: _Settings > Pages > Source: GitHub Actions_ (una volta sola), poi _Actions > Sito > Run workflow_.
 
 ## Contribuire
 

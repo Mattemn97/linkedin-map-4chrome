@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LinkeMap · le offerte di lavoro su una mappa</title>
+    <meta
+      name="description"
+      content="Estensione gratuita e open source per Chrome, Edge e Brave: importa i risultati di una ricerca di lavoro su LinkedIn Jobs e li mostra su una mappa, con filtri per regione, distanza e minuti in auto."
+    />
+    <meta property="og:title" content="LinkeMap · le offerte di lavoro su una mappa" />
+    <meta
+      property="og:description"
+      content="Importa una ricerca di LinkedIn Jobs e guarda le offerte su una mappa: regione, km e minuti in auto da casa tua."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="img/mappa.jpg" />
+    <meta name="theme-color" content="#0a66c2" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="stile.css" />
+  </head>
+  <body>
+    <a class="salta" href="#contenuto">Vai al contenuto</a>
+    <header class="testata">
+      <div class="larghezza testata-riga">
+        <a class="marchio" href="#">
+          <img src="icon.svg" alt="" width="32" height="32" />
+          <span>LinkeMap</span>
+        </a>
+        <nav aria-label="Sezioni">
+          <a href="#come">Come funziona</a>
+          <a href="#demo">Demo</a>
+          <a href="#installa">Installa</a>
+          <a href="privacy.html">Privacy</a>
+          <a class="nav-github" href="https://github.com/Mattemn97/linkedin-map-4chrome">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenuto">
+      <section class="eroe">
+        <div class="larghezza eroe-griglia">
+          <div>
+            <p class="occhiello">Estensione per Chrome, Edge e Brave · gratuita · open source</p>
+            <h1>Le offerte di lavoro, su una mappa.</h1>
+            <p class="sottotitolo">
+              LinkeMap importa tutti i risultati di una ricerca su LinkedIn Jobs e li mette su una mappa
+              interattiva. Scegli un punto, per esempio casa tua, e guarda solo le offerte entro 30 km o entro
+              45 minuti di auto. Niente account, niente server: i dati restano nel tuo browser.
+            </p>
+            <div class="azioni">
+              <a class="bottone primario" href="#demo">Prova la demo</a>
+              <a class="bottone" href="#installa">Installa l'estensione</a>
+            </div>
+            <p class="nota">La demo usa offerte e aziende inventate e gira qui, senza LinkedIn.</p>
+          </div>
+          <figure class="cornice eroe-immagine">
+            <picture>
+              <source srcset="img/mappa-scura.jpg" media="(prefers-color-scheme: dark)" />
+              <img
+                src="img/mappa.jpg"
+                width="1280"
+                height="800"
+                alt="La mappa di LinkeMap: elenco delle offerte a sinistra, segnaposto raggruppati sulle città italiane a destra"
+              />
+            </picture>
+          </figure>
+        </div>
+      </section>
+
+      <section class="striscia" aria-label="In breve">
+        <ul class="larghezza">
+          <li><strong>1000</strong> offerte per ricerca</li>
+          <li><strong>km e minuti</strong> da un punto a scelta</li>
+          <li><strong>20</strong> regioni, e i paesi vicini</li>
+          <li><strong>CSV</strong> per Excel</li>
+          <li><strong>MIT</strong> codice aperto</li>
+        </ul>
+      </section>
+
+      <section id="come" class="sezione">
+        <div class="larghezza">
+          <h2>Tre passi, dalla ricerca alla mappa</h2>
+          <ol class="passi">
+            <li class="scheda">
+              <span class="numero">1</span>
+              <h3>Cerca come sempre</h3>
+              <p>
+                Apri <code>linkedin.com/jobs/search</code> da collegato e imposta parole chiave, località e
+                filtri. LinkeMap legge proprio quella ricerca.
+              </p>
+            </li>
+            <li class="scheda">
+              <span class="numero">2</span>
+              <h3>Importa con un clic</h3>
+              <p>
+                Dall'icona di LinkeMap premi «Importa»: scarica tutte le pagine dei risultati, 25 offerte ogni
+                1,5 secondi, anche a popup chiuso.
+              </p>
+            </li>
+            <li class="scheda">
+              <span class="numero">3</span>
+              <h3>Filtra sulla mappa</h3>
+              <p>
+                Le offerte appaiono subito in lista e i segnaposto arrivano man mano. Filtra per regione,
+                modalità, data, raggio in km o minuti in auto.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="demo" class="sezione demo">
+        <div class="larghezza">
+          <h2>Provala qui: è la mappa vera</h2>
+          <p class="intro">
+            Sotto c'è la pagina della mappa dell'estensione, con 57 offerte inventate. Prova i filtri, scrivi
+            il tuo indirizzo nel riquadro «Vicino a un punto», segna una preferita. L'indirizzo e i tempi in
+            auto usano i servizi pubblici di OpenStreetMap, come nell'estensione.
+          </p>
+          <div class="demo-griglia">
+            <div class="cornice finestra">
+              <div class="finestra-barra" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <code>chrome-extension://linkemap/map.html</code>
+              </div>
+              <iframe
+                id="demo-app"
+                src="demo/"
+                title="Demo interattiva della mappa di LinkeMap"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <aside class="demo-pannello">
+              <div class="finto-popup" aria-labelledby="popup-titolo">
+                <p id="popup-titolo" class="finto-popup-titolo">
+                  <img src="icon.svg" alt="" width="20" height="20" /> LinkeMap
+                </p>
+                <p class="nota">Ricerca LinkedIn rilevata nella scheda attiva.</p>
+                <button id="demo-importa" type="button" class="bottone primario pieno">
+                  Importa le offerte di questa ricerca
+                </button>
+                <progress id="demo-barra" max="1" value="0" hidden></progress>
+                <p id="demo-avanzamento" class="nota" aria-live="polite">
+                  Rivedi l'importazione dal vivo, più veloce del vero.
+                </p>
+              </div>
+              <h3>Prova subito</h3>
+              <div class="scorciatoie">
+                <button type="button" data-prova="milano">Entro 45 minuti da Milano</button>
+                <button type="button" data-prova="bologna">Entro 60 km da Bologna</button>
+                <button type="button" data-prova="remoto">Solo da remoto</button>
+                <button type="button" data-prova="emilia">Regione Emilia-Romagna</button>
+                <button type="button" data-prova="settimana">Pubblicate nell'ultima settimana</button>
+                <button type="button" data-prova="azzera">Azzera i filtri</button>
+              </div>
+              <p class="nota">
+                <a href="demo/">Apri la demo a schermo intero</a>
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="sezione">
+        <div class="larghezza">
+          <h2>Cosa sa fare</h2>
+          <div class="schede">
+            <article class="scheda">
+              <h3>Ricerca intera</h3>
+              <p>
+                Tutte le pagine dei risultati, fino a 1000 offerte. Importando altre ricerche le offerte si
+                sommano.
+              </p>
+            </article>
+            <article class="scheda">
+              <h3>Posizioni giuste</h3>
+              <p>
+                Ogni località è cercata su OpenStreetMap dentro il suo paese, con la regione: niente "Italy"
+                in Texas.
+              </p>
+            </article>
+            <article class="scheda">
+              <h3>Vicino a casa</h3>
+              <p>
+                Un indirizzo o un clic sulla mappa, poi un raggio in km o i minuti in auto (stima OSRM, senza
+                traffico).
+              </p>
+            </article>
+            <article class="scheda">
+              <h3>Filtri e ordine</h3>
+              <p>
+                Testo, in sede, ibrido o remoto, regione, data, promosse. Ordina per data, azienda, distanza o
+                tempo.
+              </p>
+            </article>
+            <article class="scheda">
+              <h3>Preferite e nascoste</h3>
+              <p>Segna le offerte che ti interessano e togli di mezzo le altre, senza perderle.</p>
+            </article>
+            <article class="scheda">
+              <h3>Nuove dall'ultima volta</h3>
+              <p>Le offerte mai viste arrivate con l'ultima importazione hanno un'etichetta e un filtro.</p>
+            </article>
+            <article class="scheda">
+              <h3>Esporta in CSV</h3>
+              <p>Le offerte filtrate, con distanze e tempi, in un file che Excel apre senza conversioni.</p>
+            </article>
+            <article class="scheda">
+              <h3>Tema chiaro e scuro</h3>
+              <p>La mappa segue il tema del sistema, anche se cambia a pagina aperta.</p>
+            </article>
+          </div>
+          <div class="galleria">
+            <figure class="cornice">
+              <img
+                src="img/raggio.jpg"
+                width="1280"
+                height="800"
+                loading="lazy"
+                alt="Offerte entro 60 km da Bologna, ordinate per distanza, con il cerchio del raggio sulla mappa"
+              />
+              <figcaption>Entro 60 km da Bologna, ordinate per distanza.</figcaption>
+            </figure>
+            <figure class="cornice">
+              <img
+                src="img/importa.jpg"
+                width="1280"
+                height="800"
+                loading="lazy"
+                alt="Importazione in corso: le offerte sono già in lista e i segnaposto compaiono man mano"
+              />
+              <figcaption>
+                Durante l'importazione: la lista c'è subito, le posizioni arrivano una alla volta.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="installa" class="sezione installa">
+        <div class="larghezza">
+          <h2>Installala in due minuti</h2>
+          <div class="schede tre">
+            <article class="scheda">
+              <h3>Dalla release <span class="etichetta">consigliato</span></h3>
+              <ol class="elenco">
+                <li>
+                  Scarica <code>LinkeMap-&lt;versione&gt;-test.zip</code> dall'<a
+                    href="https://github.com/Mattemn97/linkedin-map-4chrome/releases/latest"
+                    >ultima release</a
+                  >.
+                </li>
+                <li>Estrai lo zip in una cartella che non cancellerai.</li>
+                <li>
+                  Apri <code>chrome://extensions</code> e attiva <strong>Modalità sviluppatore</strong>.
+                </li>
+                <li><strong>Carica estensione non pacchettizzata</strong> e scegli la cartella estratta.</li>
+                <li>Fissa l'icona dal menu del puzzle 🧩.</li>
+              </ol>
+              <a
+                class="bottone primario"
+                href="https://github.com/Mattemn97/linkedin-map-4chrome/releases/latest"
+                >Scarica l'ultima release</a
+              >
+            </article>
+            <article class="scheda">
+              <h3>Dal codice</h3>
+              <pre><code>git clone https://github.com/Mattemn97/linkedin-map-4chrome</code></pre>
+              <p>
+                Poi «Carica estensione non pacchettizzata» sulla cartella clonata. Niente build: i file si
+                caricano così come sono. Dopo una modifica premi ↻ sulla scheda dell'estensione.
+              </p>
+            </article>
+            <article class="scheda">
+              <h3>Chrome Web Store <span class="etichetta">in arrivo</span></h3>
+              <p>
+                La pubblicazione sullo store è in preparazione. Funziona anche su Microsoft Edge
+                (<code>edge://extensions</code>) e Brave (<code>brave://extensions</code>), con gli stessi
+                passi.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sezione dati">
+        <div class="larghezza dati-griglia">
+          <div>
+            <h2>Niente server, niente account</h2>
+            <p>
+              LinkeMap non ha un server. Le offerte, le preferite e i filtri stanno nello storage locale del
+              tuo browser e se ne vanno con «Svuota» o disinstallando l'estensione. Nessuna statistica,
+              nessuna pubblicità.
+            </p>
+            <p><a href="privacy.html">Leggi l'informativa sulla privacy</a></p>
+          </div>
+          <ul class="spunte">
+            <li>
+              Le richieste a LinkedIn partono dalla tua scheda, con la tua sessione, solo quando premi
+              «Importa».
+            </li>
+            <li>A OpenStreetMap (Nominatim) va solo il nome delle località, per trovarne le coordinate.</li>
+            <li>A OSRM vanno solo coordinate, e solo se usi i minuti in auto.</li>
+            <li>Le immagini della mappa arrivano da Esri, come per qualsiasi mappa online.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="domande" class="sezione">
+        <div class="larghezza stretta">
+          <h2>Domande e limiti</h2>
+          <details>
+            <summary>La posizione è l'indirizzo dell'azienda?</summary>
+            <p>
+              No: è la località dell'offerta indicata da LinkedIn (la città, non la via). Le offerte da remoto
+              con località generica, per esempio "Italia", finiscono al centro del paese.
+            </p>
+          </details>
+          <details>
+            <summary>Funziona con la nuova ricerca con AI di LinkedIn?</summary>
+            <p>
+              Importa solo la ricerca classica (<code>/jobs/search/</code>). Se sei nella ricerca con AI, il
+              popup te lo dice e ti offre un pulsante per riaprirla in modalità classica.
+            </p>
+          </details>
+          <details>
+            <summary>È consentito da LinkedIn?</summary>
+            <p>
+              L'importazione fa richieste automatiche all'API interna di LinkedIn con il tuo account, a ritmo
+              lento. I Termini di Servizio di LinkedIn vietano lo scraping automatico: usala con moderazione e
+              a tuo rischio. LinkeMap è un progetto indipendente e non è affiliato a LinkedIn.
+            </p>
+          </details>
+          <details>
+            <summary>I tempi in auto sono precisi?</summary>
+            <p>
+              Sono una stima in auto senza traffico, dal server pubblico di OSRM. A piedi, in bici e con i
+              mezzi non sono supportati.
+            </p>
+          </details>
+          <details>
+            <summary>Ho trovato un errore, o LinkedIn ha cambiato qualcosa.</summary>
+            <p>
+              Apri una <a href="https://github.com/Mattemn97/linkedin-map-4chrome/issues">issue su GitHub</a>.
+              Se l'importazione dà «Richiesta non accettata (400)», LinkedIn ha probabilmente cambiato la sua
+              API.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="chiusura">
+        <div class="larghezza">
+          <h2>Trova il lavoro giusto, anche vicino a casa.</h2>
+          <div class="azioni centro">
+            <a
+              class="bottone primario"
+              href="https://github.com/Mattemn97/linkedin-map-4chrome/releases/latest"
+              >Scarica LinkeMap</a
+            >
+            <a class="bottone" href="https://github.com/Mattemn97/linkedin-map-4chrome">Codice su GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="piede">
+      <div class="larghezza piede-riga">
+        <p>
+          LinkeMap · licenza
+          <a href="https://github.com/Mattemn97/linkedin-map-4chrome/blob/main/LICENSE">MIT</a>
+          · progetto indipendente, non affiliato a LinkedIn
+        </p>
+        <p>
+          <a href="privacy.html">Privacy</a> ·
+          <a href="https://github.com/Mattemn97/linkedin-map-4chrome/blob/main/CHANGELOG.md">Novità</a> ·
+          <a href="https://github.com/Mattemn97/linkedin-map-4chrome/issues">Segnala un problema</a>
+        </p>
+      </div>
+    </footer>
+    <script src="sito.js" defer></script>
+  </body>
+</html>

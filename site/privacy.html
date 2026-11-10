@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy · LinkeMap</title>
+    <meta
+      name="description"
+      content="Informativa sulla privacy dell'estensione LinkeMap: quali dati tratta, dove restano, a chi vengono inviati."
+    />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="stile.css" />
+  </head>
+  <body>
+    <header class="testata">
+      <div class="larghezza testata-riga">
+        <a class="marchio" href="./">
+          <img src="icon.svg" alt="" width="32" height="32" />
+          <span>LinkeMap</span>
+        </a>
+        <nav aria-label="Sezioni">
+          <a href="./">Home</a>
+          <a class="nav-github" href="https://github.com/Mattemn97/linkedin-map-4chrome">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="larghezza stretta testo-lungo">
+      <h1>Informativa sulla privacy</h1>
+      <p class="nota">Ultimo aggiornamento: 10 novembre 2026 · vale per LinkeMap 0.5.0 e successive</p>
+
+      <p>
+        LinkeMap è un'estensione per browser gratuita e open source, sviluppata da Matteo Filippini come
+        progetto indipendente. Non è affiliata a LinkedIn. Questa pagina spiega quali dati tratta, dove
+        restano e a quali servizi vengono inviati.
+      </p>
+
+      <h2>In breve</h2>
+      <ul>
+        <li>LinkeMap non ha un server: nessun dato arriva allo sviluppatore.</li>
+        <li>Non ci sono account, statistiche di utilizzo, pubblicità o tracciamenti.</li>
+        <li>Tutto quello che l'estensione salva resta nello storage locale del tuo browser.</li>
+        <li>I dati non vengono venduti né ceduti a nessuno.</li>
+      </ul>
+
+      <h2>Dati salvati sul tuo dispositivo</h2>
+      <p>Nello storage locale dell'estensione (<code>chrome.storage.local</code>) LinkeMap salva:</p>
+      <ul>
+        <li>
+          le offerte importate: titolo, azienda, località, modalità di lavoro, data di pubblicazione,
+          indirizzo dell'annuncio e del logo dell'azienda;
+        </li>
+        <li>la cache delle località già trovate (nome della località, coordinate, regione);</li>
+        <li>le offerte che hai segnato come preferite o nascoste;</li>
+        <li>i filtri della mappa, compreso il punto di partenza che hai scelto;</li>
+        <li>lo stato dell'ultima importazione (quante offerte, quando).</li>
+      </ul>
+      <p>
+        Questi dati non lasciano il browser, se non verso i servizi elencati sotto e solo per le funzioni
+        descritte. Si cancellano con il pulsante «Svuota» della mappa (le offerte) o disinstallando
+        l'estensione (tutto).
+      </p>
+
+      <h2>Servizi esterni</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Servizio</th>
+            <th scope="col">Quando</th>
+            <th scope="col">Cosa riceve</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LinkedIn (<code>www.linkedin.com</code>)</td>
+            <td>Solo quando premi «Importa»</td>
+            <td>
+              Le richieste della ricerca che hai aperto, fatte dalla tua scheda di LinkedIn con la tua
+              sessione, come farebbe la pagina stessa. LinkeMap legge il cookie <code>JSESSIONID</code> solo
+              per mandarlo come intestazione anti-CSRF a LinkedIn; non lo salva e non lo invia altrove.
+            </td>
+          </tr>
+          <tr>
+            <td>Nominatim di OpenStreetMap (<code>nominatim.openstreetmap.org</code>)</td>
+            <td>Per le località non ancora in cache, e quando cerchi un indirizzo</td>
+            <td>
+              Il nome della località dell'offerta (per esempio "Bologna, Emilia-Romagna") con il codice del
+              paese, oppure l'indirizzo che scrivi nel riquadro «Vicino a un punto».
+            </td>
+          </tr>
+          <tr>
+            <td>OSRM (<code>router.project-osrm.org</code>)</td>
+            <td>Solo se filtri od ordini per minuti in auto</td>
+            <td>Le coordinate del punto di partenza e delle località delle offerte.</td>
+          </tr>
+          <tr>
+            <td>Esri (<code>server.arcgisonline.com</code>)</td>
+            <td>Quando apri la mappa</td>
+            <td>Le richieste delle immagini della mappa per la zona che stai guardando.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Come per ogni richiesta web, questi servizi vedono anche il tuo indirizzo IP e le informazioni
+        standard del browser. Valgono le loro informative:
+        <a href="https://www.linkedin.com/legal/privacy-policy">LinkedIn</a>,
+        <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap Foundation</a>,
+        <a href="https://project-osrm.org/">OSRM</a>,
+        <a href="https://www.esri.com/en-us/privacy/overview">Esri</a>.
+      </p>
+
+      <h2>Permessi dell'estensione</h2>
+      <ul>
+        <li><strong>storage</strong>: salvare offerte, cache e filtri sul tuo dispositivo.</li>
+        <li><strong>tabs</strong>: riconoscere se la scheda attiva è una ricerca di LinkedIn Jobs.</li>
+        <li>
+          <strong>scripting</strong>: eseguire le richieste di importazione dentro la scheda di LinkedIn.
+        </li>
+        <li>
+          <strong>cookies</strong>: leggere il cookie di sessione di LinkedIn per l'intestazione anti-CSRF.
+        </li>
+        <li>
+          <strong>Accesso ai siti</strong> <code>linkedin.com</code>,
+          <code>nominatim.openstreetmap.org</code>, <code>router.project-osrm.org</code>: solo i servizi
+          descritti sopra.
+        </li>
+      </ul>
+
+      <h2>Uso dei dati</h2>
+      <p>
+        I dati servono solo a mostrare le offerte sulla mappa e a filtrarle. Non vengono usati per pubblicità,
+        profilazione o valutazioni di affidabilità creditizia, né trasferiti a terzi al di fuori di quanto
+        descritto sopra. Lo sviluppatore non vede né conserva alcun dato.
+      </p>
+
+      <h2>Il sito e la demo</h2>
+      <p>
+        Questo sito è ospitato da GitHub Pages, che registra i dati tecnici delle visite secondo la
+        <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement"
+          >propria informativa</a
+        >. Il sito non usa cookie né statistiche. La demo gira nella pagina con offerte inventate; se cerchi
+        un indirizzo o i tempi in auto, la richiesta va a Nominatim e OSRM come nell'estensione.
+      </p>
+
+      <h2>Modifiche e contatti</h2>
+      <p>
+        Le modifiche a questa informativa sono pubblicate qui, con la data aggiornata, e nella cronologia del
+        repository. Per domande o richieste apri una
+        <a href="https://github.com/Mattemn97/linkedin-map-4chrome/issues">issue su GitHub</a>.
+      </p>
+    </main>
+
+    <footer class="piede">
+      <div class="larghezza piede-riga">
+        <p>LinkeMap · progetto indipendente, non affiliato a LinkedIn</p>
+        <p><a href="./">Torna alla home</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
